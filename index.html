@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🦅 TALON | League Talon</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">🦅 ᎢᎪᏞᎾN</div>
+
+    <nav>
+      <button class="active" onclick="showSection('home', this)">خانه</button>
+      <button onclick="showSection('games', this)">🎮 بازی ها</button>
+      <button onclick="showSection('chat', this)">💬 چت</button>
+      <button onclick="showSection('poll', this)">📊 نظرسنجی</button>
+      <button onclick="showSection('table', this)">📋 جدول</button>
+      <button onclick="showSection('honors', this)">🏆 افتخارات</button>
+      <button onclick="showSection('news', this)">📰 اخبار</button>
+      <button onclick="showSection('admin', this)">⚙️ پنل مدیریت</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section id="home" class="section active">
+  <div class="hero">
+    <h1>تالون یک لیگ نیست! یک خانواده است.</h1>
+    <p>🦅 ᎢᎪᏞᎾN | @League_Talon 🦅</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <h3>🎮 بازی ها</h3>
+      <p>نتایج و بازی‌های لیگ تالون</p>
+    </div>
+
+    <div class="card">
+      <h3>📋 جدول</h3>
+      <p>جدول رسمی که توسط مدیریت تنظیم می‌شود</p>
+    </div>
+
+    <div class="card">
+      <h3>🏆 افتخارات</h3>
+      <p>امتیازات و افتخارات مربیان تالون</p>
+    </div>
+
+    <div class="card">
+      <h3>📰 اخبار</h3>
+      <p>آخرین اخبار تالون</p>
+    </div>
+  </div>
+</section>
+
+
+<section id="games" class="section">
+  <h2 class="title">🎮 بازی ها</h2>
+  <div id="gamesList"></div>
+</section>
+
+
+<section id="chat" class="section">
+  <h2 class="title">💬 چت تالون</h2>
+
+  <div class="card">
+    <input id="chatName" class="input" placeholder="نام شما">
+    <textarea id="chatText" placeholder="پیام شما..."></textarea>
+
+    <button class="btn" onclick="sendChat()">ارسال پیام</button>
+
+    <div id="chatList"></div>
+  </div>
+</section>
+
+
+<section id="poll" class="section">
+  <h2 class="title">📊 نظرسنجی</h2>
+
+  <div class="card">
+    <h3>بهترین مربی تالون؟</h3>
+
+    <button class="poll-option" onclick="vote('رویس وفادار')">
+      🥇 رویس وفادار
+    </button>
+
+    <button class="poll-option" onclick="vote('مارال')">
+      🥈 مارال
+    </button>
+
+    <button class="poll-option" onclick="vote('ماتیاس')">
+      🥉 ماتیاس
+    </button>
+
+    <button class="poll-option" onclick="vote('رافی')">
+      🏅 رافی
+    </button>
+
+    <p id="voteResult"></p>
+  </div>
+</section>
+
+
+<section id="table" class="section">
+  <h2 class="title">📋 جدول لیگ</h2>
+
+  <p class="description">
+    این جدول فقط توسط مدیریت سایت تنظیم می‌شود.
+  </p>
+
+  <div class="table-box">
+    <table>
+      <thead>
+        <tr>
+          <th>رتبه</th>
+          <th>مربی / تیم</th>
+          <th>بازی</th>
+          <th>برد</th>
+          <th>مساوی</th>
+          <th>باخت</th>
+          <th>امتیاز</th>
+        </tr>
+      </thead>
+
+      <tbody id="leagueTable"></tbody>
+    </table>
+  </div>
+</section>
+
+
+<section id="honors" class="section">
+  <h2 class="title">🏆 افتخارات 53 - SeAsOn</h2>
+
+  <input
+    id="honorSearch"
+    class="search"
+    placeholder="🔎 جستجوی مربی..."
+    oninput="renderHonors(this.value)"
+  >
+
+  <div class="table-box">
+    <table>
+      <thead>
+        <tr>
+          <th>رتبه</th>
+          <th>مربی</th>
+          <th>امتیاز</th>
+        </tr>
+      </thead>
+
+      <tbody id="honorsTable"></tbody>
+    </table>
+  </div>
+
+  <div class="card rules">
+    <h3>📜 قوانین امتیازدهی</h3>
+    <p>🥇 قهرمانی لیگ = 10</p>
+    <p>🥈 نائب قهرمانی لیگ = 5</p>
+    <p>🥉 سومی لیگ = 3</p>
+    <p>🏅 چهارمی لیگ = 1</p>
+    <p>🎗️ قهرمانی جام حذفی = 6</p>
+    <p>🎖️ نائب قهرمانی جام حذفی = 1</p>
+    <p>🏆 قهرمانی سوپرکاپ = 9</p>
+    <p>🍃 نائب قهرمانی سوپرکاپ = 2</p>
+    <p>💀 سه‌گانه = 20</p>
+    <p>🔥 توپ طلای ماه = 20</p>
+    <p>💀 سوپر توپ طلای سال = 50</p>
+  </div>
+</section>
+
+
+<section id="news" class="section">
+  <h2 class="title">📰 اخبار تالون</h2>
+  <div id="newsList"></div>
+</section>
+
+
+<section id="admin" class="section">
+  <h2 class="title">⚙️ پنل مدیریت</h2>
+
+  <div id="loginBox" class="admin-box">
+
+    <h3>🔐 ورود مدیریت</h3>
+
+    <input
+      id="adminPassword"
+      class="input"
+      type="password"
+      placeholder="رمز مدیریت"
+      onkeydown="if(event.key==='Enter') loginAdmin()"
+    >
+
+    <button class="btn" onclick="loginAdmin()">ورود</button>
+
+    <p id="loginError" class="error"></p>
+  </div>
+
+
+  <div id="adminPanel" class="admin-panel">
+
+    <div class="admin-section">
+      <h3>📋 مدیریت جدول لیگ</h3>
+
+      <input id="leagueName" class="input" placeholder="نام مربی / تیم">
+      <input id="leagueGames" class="input" type="number" placeholder="بازی">
+      <input id="leagueWins" class="input" type="number" placeholder="برد">
+      <input id="leagueDraws" class="input" type="number" placeholder="مساوی">
+      <input id="leagueLosses" class="input" type="number" placeholder="باخت">
+      <input id="leaguePoints" class="input" type="number" placeholder="امتیاز">
+
+      <button class="btn green" onclick="addLeaguePlayer()">
+        ➕ افزودن به جدول
+      </button>
+
+      <div id="adminLeague"></div>
+    </div>
+
+
+    <div class="admin-section">
+      <h3>🎮 مدیریت بازی‌ها</h3>
+
+      <input id="gameTeam1" class="input" placeholder="تیم اول">
+      <input id="gameTeam2" class="input" placeholder="تیم دوم">
+      <input id="gameScore1" class="input" type="number" placeholder="گل تیم اول">
+      <input id="gameScore2" class="input" type="number" placeholder="گل تیم دوم">
+
+      <button class="btn green" onclick="addGame()">
+        ➕ افزودن بازی
+      </button>
+
+      <div id="adminGames"></div>
+    </div>
+
+
+    <div class="admin-section">
+      <h3>📰 مدیریت اخبار</h3>
+
+      <input id="newsTitle" class="input" placeholder="عنوان خبر">
+
+      <textarea
+        id="newsText"
+        placeholder="متن خبر"
+      ></textarea>
+
+      <button class="btn green" onclick="addNews()">
+        ➕ انتشار خبر
+      </button>
+
+      <div id="adminNews"></div>
+    </div>
+
+
+    <div class="admin-section">
+      <h3>🏆 مدیریت افتخارات</h3>
+
+      <input id="honorName" class="input" placeholder="نام مربی">
+      <input id="honorScore" class="input" type="number" placeholder="امتیاز">
+
+      <button class="btn green" onclick="addHonor()">
+        ➕ افزودن افتخار
+      </button>
+
+      <div id="adminHonors"></div>
+    </div>
+
+
+    <button class="btn red" onclick="logoutAdmin()">
+      🚪 خروج از مدیریت
+    </button>
+
+  </div>
+</section>
+
+</main>
+
+
+<footer>
+  🦅 ᎢᎪᏞᎾN | @League_Talon 🦅
+  <br>
+  <small>تالون یک لیگ نیست! یک خانواده است.</small>
+</footer>
+
+
+<div id="confirmModal" class="modal">
+  <div class="modal-box">
+
+    <h3 id="confirmTitle">تأیید عملیات</h3>
+
+    <p id="confirmText"></p>
+
+    <div class="modal-buttons">
+
+      <button class="btn green" onclick="confirmYes()">
+        بله
+      </button>
+
+      <button class="btn red" onclick="confirmNo()">
+        خیر
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+
+<script src="script.js"></script>
+<script src="admin.js"></script>
+
+</body>
+        </html>
